@@ -9,8 +9,8 @@
 
 #include "sine_table_4096_values_10_bit.h"
 
-const uint8_t PIN_PWM = 4; // PWM output
-const uint8_t PWM_RESOLUTION = 10; // PWM output
+const byte DAC1 = A21;
+const byte DAC_RESOLUTION = 12;
 uint32_t phase_offset = 4294967;
 uint32_t phase_accumulator = 0x00000000;
 uint16_t  address_pointer = 0x0000;
@@ -22,12 +22,11 @@ IntervalTimer myISR; // Create an IntervalTimer object
 void isr_DDS() {
   phase_accumulator = phase_accumulator + phase_offset;
   address_pointer = phase_accumulator >> 22; // shift 22 bit
-  analogWrite(PIN_PWM,SINE_4096V_10B[address_pointer]);  
+  analogWrite(DAC1, PIN_PWM,SINE_4096V_10B[address_pointer]);
 }
 
-void setup() {  
-  analogWriteFrequency(PIN_PWM, 146484.38);
-  analogWriteResolution(PWM_RESOLUTION);  
+void setup() {    
+  analogWriteResolution(DAC_RESOLUTION); 
   myISR.begin(isr_DDS, 1);  // 1µs -> 1Mz
   //myISR.priority(0);        // highest priority
 }

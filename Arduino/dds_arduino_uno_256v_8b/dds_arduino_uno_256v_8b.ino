@@ -1,8 +1,8 @@
 /* dds_arduino_uno_256v_8b.ino
  * weigu.lu 
- * N = 32, P = 8, B = 8, res = 8.8777Hz 
+ * N = 32, P = 8, B = 8, res = 0.000008.466 Hz 
  * 1kHz Sinus DDS 
- * PWM output on pin 11 connected to low-pass 100nF, 270 Ohm
+ * PWM output on pin 11 connected to low-pass
  * offset = fout*2^N/fCLK = 1000Hz*2^32/36363Hz = 118113668
  */
 
